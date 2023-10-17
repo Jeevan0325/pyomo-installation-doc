@@ -1,4 +1,3 @@
-
 from pyomo.environ import *
 
 # Sample data
@@ -18,12 +17,16 @@ priority_weights = [
 
 # Resource data
 resource_availabilities = [
-    [1] * T for _ in range(M)  # Availability for Resource 1 and Resource 2
+    [1] * T for _ in range(M)
 ]
 processing_times_resource = [
-    [1, 0.8, 1.5, 0.7, 1, 0.8, 1.5, 0.7, 1, 0.8],  # Processing times for Resource 1
-    [0.5, 1, 2, 0.7, 0.5, 1, 2, 0.7, 0.5, 1]       # Processing times for Resource 2
+    [1, 0.8, 1.5, 0.7, 1, 0.8, 1.5, 0.7, 1, 0.8],
+    [0.5, 1, 2, 0.7, 0.5, 1, 2, 0.7, 0.5, 1]
 ]
+
+# Check data dimensions
+if len(resource_availabilities) != M or len(resource_availabilities[0]) != T:
+    raise ValueError("Resource availability dimensions are incorrect")
 
 # Create Pyomo model
 model = ConcreteModel()
